@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Diversificadora de Criptos | Yang Cristopher</title>
+</head>
+<body>
+
+
+    <section class="fiatCalculator">
+        <h2>FACILITAMOS TUS INVERSIONES</h2>
+        <p>Elegí en cuantas criptomonedas invertir, y calculá cuanto invertir de cada una</p>
+
+
+<div>
+  <select name="moneda" id="monedaFiat">
+  <option value="value1">$ARS | Argentina</option>
+  <option value="value2">$CLP | Chile</option>
+  <option value="value3">$BRL | Brasil</option>
+  <option value="value4">$COP | Colombia</option>
+</select>
+
+  <input type="number" id="cantidadPesos" placeholder="cuantos pesos tenes" required>
+</div>
+
+<h3 class="text-center danger">Tenes ${cantidadDolar} dolares</h3>
+
+</section>
+
+          <div class="cryptoCalculator">
+
+              <div class="addingCryptos px-5">
+
+                <h4 class="text-center">AGREGA TUS CRIPTOS</h4>
+                  <form action="#">
+                    <div class="container my-5">
+                        <div class="row">
+                          <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                              <select name="cryptomoneda" id="selectCrypto">
+                                <option value="value1">ETH | Ethereum</option>
+                                <option value="value2">BTC | Bitcoin</option>
+                                <option value="value3">SOL | Solana</option>
+                                <option value="value4">ADA | Cardano</option>
+                                <option value="value4">XMR | Monero</option>
+                                <option value="value4">BNB | BNB</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <input type="number" id="precioCrypto" class="form-control" required>
+                              <label class="form-control-placeholder" for="precioCrypto">Valor de la cripto en dolares</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="usdCrypto" class="form-control" required>
+                                <label class="form-control-placeholder" for="usdCrypto">Cuantos dolares queres invertir en esta cripto</label>
+                              </div>
+
+                              <input class="form-control" type="text" value="vas a comprar ${cantidadCryptoComprada} de ${nombreCrypto}" aria-label="readonly input example" readonly>
+
+                              <div class="buttonForm">
+                                  <button type="button" class="btn btn-danger">Limpiar campos</button>
+                                  <button type="button" class="btn btn-success">Agregar Crypto</button>
+                              </div>
+                          </div>
+                        </div>
+
+
+                  </form>
+              </div>
+          </div>
+
+          <div class="completePortfolio px-5">
+
+            <!-- A C A   U S A R I A   D  O M -->
+              <h4 class="text-center">TUS CRIPTOS</h4>
+
+                <!--ACA IRIAN TODAS LAS CRIPTOS QUE VA AGREGANDO COMO CARDS-->
+
+              <div class="card-deck row gap-3 justify-content-center my-5" id="cryptoShoppingCart">
+
+
+
+
+              </div>
+
+            </div>
+    </section>
+    
+
+
+
+
+</html>
+<script src="./js/dom-test.js"></script>
+</body>
