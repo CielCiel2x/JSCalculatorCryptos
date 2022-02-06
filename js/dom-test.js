@@ -51,6 +51,7 @@ function crearCards() {
         cryptoDetails.appendChild(liPrecio);
         cryptoDetails.appendChild(liUsd);
         cryptoDetails.appendChild(liCryptoAmount);
+        
         cardsCryptos.appendChild(divCrypto);
     })
 }
