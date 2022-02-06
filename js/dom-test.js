@@ -30,28 +30,24 @@ function crearCards() {
         const cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
 
-        const cardTitle = document.createElement("h5");
-        cardTitle.textContent = crypto.nombre;
-        cardTitle.classList.add("card-title");
 
-        const cryptoDetails = document.createElement("ul");
+        divCrypto.innerHTML += `<div class="card-body>
+                                    <h5 class="card-title">${crypto.nombre}</h5>
+                                    <ul>
+                                        <li>
+                                        precio: ${crypto.precio}
+                                        </li>
+                                        <li>
+                                        precio: ${crypto.compraUsd}
+                                        </li>
+                                        <li>
+                                        precio: ${crypto.compraDeCrypto}
+                                        </li>
+                                    </ul>
+                                </div>`
 
-        const liPrecio = document.createElement("li");
-        liPrecio.textContent = `precio: ${crypto.precio}`;
-
-        const liUsd = document.createElement("li");
-        liUsd.textContent = `tu compra: ${crypto.compraUsd}`;
-
-        const liCryptoAmount = document.createElement("li");
-        liCryptoAmount.textContent = `cantidad: ${crypto.compraDeCrypto}`;
+        cardsCryptos.appendChild(divCrypto);
 
         divCrypto.appendChild(cardBody);
-        cardBody.appendChild(cardTitle);
-        cardBody.appendChild(cryptoDetails);
-        cryptoDetails.appendChild(liPrecio);
-        cryptoDetails.appendChild(liUsd);
-        cryptoDetails.appendChild(liCryptoAmount);
-        
-        cardsCryptos.appendChild(divCrypto);
     })
 }
