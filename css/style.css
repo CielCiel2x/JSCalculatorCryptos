@@ -120,3 +120,29 @@ input[type="number"] {
     opacity: 1;
   }
 
+.cantidadDolares {
+  font-size: 3em;
+}
+
+.resultadoDolares {
+  font-weight: 600;
+  color: green;
+}
+
+
+.calculadoraDolar form {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  width: 800px;
+  align-items: center;
+}
+
+.calculadoraDolar form input {
+  height: 85px;
+  font-size: 2em;
+}
+
+.calculadoraDolar form select {
+  height: 25px;
+}

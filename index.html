@@ -16,18 +16,22 @@
         <p>Elegí en cuantas criptomonedas invertir, y calculá cuanto invertir de cada una</p>
 
 
-<div>
-  <select name="moneda" id="monedaFiat">
-  <option value="value1">$ARS | Argentina</option>
-  <option value="value2">$CLP | Chile</option>
-  <option value="value3">$BRL | Brasil</option>
-  <option value="value4">$COP | Colombia</option>
-</select>
+<div class="calculadoraDolar">
+  <form action="#">
+    <input type="number" id="cantidadPesos" placeholder="cuantos pesos tenes" class="form-control" required>
 
-  <input type="number" id="cantidadPesos" placeholder="cuantos pesos tenes" required>
+    <select name="moneda" id="monedaFiat">
+      <option value=0>$ARS | Argentina</option>
+      <option value=1>$CLP | Chile</option>
+      <option value=2>$BRL | Brasil</option>
+      <option value=3>$COP | Colombia</option>
+      </select>
+  </form>
+
+  <div class="text-center my-4 cantidadDolares">Tenes <span class="resultadoDolares"></span> dolares</div>
 </div>
 
-<h3 class="text-center danger">Tenes ${cantidadDolar} dolares</h3>
+<h3 class="text-center danger resultadoDolares"></h3>
 
 </section>
 
@@ -50,20 +54,20 @@
                                 <option value="value4">BNB | BNB</option>
                               </select>
                             </div>
+
                             <div class="form-group">
-                              <input type="number" id="precioCrypto" class="form-control" required>
-                              <label class="form-control-placeholder" for="precioCrypto">Valor de la cripto en dolares</label>
+                              <input type="number" id="usdCrypto" class="form-control" required>
+                              <label class="form-control-placeholder" for="usdCrypto">tu inversion en USD</label>
                             </div>
+
                             <div class="form-group">
-                                <input type="number" id="usdCrypto" class="form-control" required>
-                                <label class="form-control-placeholder" for="usdCrypto">Cuantos dolares queres invertir en esta cripto</label>
-                              </div>
+                              <input type="number" id="precioCrypto" class="form-control" value="Valor de la cripto en dolares" aria-label="readonly input example" readonly>
+                            </div>
 
                               <input class="form-control" type="text" value="vas a comprar ${cantidadCryptoComprada} de ${nombreCrypto}" aria-label="readonly input example" readonly>
 
                               <div class="buttonForm">
-                                  <button type="button" class="btn btn-danger">Limpiar campos</button>
-                                  <button type="button" class="btn btn-success">Agregar Crypto</button>
+                                  <input type="button" class="btn btn-success" id="agregarCrypto" onclick="agregarCrypto()">Agregar Crypto</input>
                               </div>
                           </div>
                         </div>
@@ -96,3 +100,4 @@
 </html>
 <script src="./js/dom-test.js"></script>
 </body>
+
