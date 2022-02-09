@@ -21,7 +21,7 @@
     <input type="number" id="cantidadPesos" placeholder="cuantos pesos tenes" class="form-control" required>
 
     <select name="moneda" id="monedaFiat">
-      <option value=0>$ARS | Argentina</option>
+      <option value=0 selected="selected">$ARS | Argentina</option>
       <option value=1>$CLP | Chile</option>
       <option value=2>$BRL | Brasil</option>
       <option value=3>$COP | Colombia</option>
@@ -46,28 +46,29 @@
                           <div class="col-md-6 mx-auto">
                             <div class="form-group">
                               <select name="cryptomoneda" id="selectCrypto">
-                                <option value="value1">ETH | Ethereum</option>
-                                <option value="value2">BTC | Bitcoin</option>
-                                <option value="value3">SOL | Solana</option>
-                                <option value="value4">ADA | Cardano</option>
-                                <option value="value4">XMR | Monero</option>
-                                <option value="value4">BNB | BNB</option>
+                                <option value=0>ETH | Ethereum</option>
+                                <option value=1>BTC | Bitcoin</option>
+                                <option value=2>SOL | Solana</option>
+                                <option value=3>ADA | Cardano</option>
+                                <option value=4>XMR | Monero</option>
+                                <option value=5>BNB | BNB</option>
                               </select>
                             </div>
 
-                            <div class="form-group">
+
+                              <label for="usdCrypto">tu inversion en USD</label>
                               <input type="number" id="usdCrypto" class="form-control" required>
-                              <label class="form-control-placeholder" for="usdCrypto">tu inversion en USD</label>
-                            </div>
 
-                            <div class="form-group">
-                              <input type="number" id="precioCrypto" class="form-control" value="Valor de la cripto en dolares" aria-label="readonly input example" readonly>
-                            </div>
+                              <label for="precioCrypto">El precio es de:</label>
+                              <input type="number" id="precioCrypto" class="form-control" aria-label="readonly input example" readonly>
 
-                              <input class="form-control" type="text" value="vas a comprar ${cantidadCryptoComprada} de ${nombreCrypto}" aria-label="readonly input example" readonly>
+                              <label for="tuCompra">vas a tener que comprar:</label>
+                              <input class="form-control" id="tuCompra" type="text" aria-label="readonly input example" readonly>
 
                               <div class="buttonForm">
-                                  <input type="button" class="btn btn-success" id="agregarCrypto" onclick="agregarCrypto()">Agregar Crypto</input>
+
+                                  <input type="button" class="btn btn-outline-dark" id="calcularCrypto" value="Calcular compra" onclick="calcularCompra()"></input>
+                                  <input type="button" class="btn btn-success" id="calcularCrypto" value="Agregar al portfolio" onclick="agregarPortfolio()"></input>
                               </div>
                           </div>
                         </div>
@@ -95,9 +96,9 @@
     
 
 
-
+    <script src="./js/dom-test.js"></script>
+  </body>
 
 </html>
-<script src="./js/dom-test.js"></script>
-</body>
+
 
