@@ -12,7 +12,7 @@ const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
 { pais: "Colombia", moneda: "COP", valorDolar: 3933 },]
 
 
-const ShoppingCart = [];
+let ShoppingCart = [];
 
 
 const cardsCryptos = document.querySelector("#cryptoShoppingCart");
@@ -20,7 +20,8 @@ const cardsCryptos = document.querySelector("#cryptoShoppingCart");
 // C O N S T R U C T O R
 
 class cryptomoneda {
-    constructor(nombre, precio, compraUsd, compraCrypto) {
+    constructor(id,nombre, precio, compraUsd, compraCrypto) {
+        this.id=id
         this.nombre = nombre; // nombre de la cripto, a sacar por API
         this.precio = parseFloat(precio); // precio de la cripto, a sacar por API
         this.compraUsd = compraUsd;
@@ -68,6 +69,7 @@ const crearCards = () => {
         const cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
 
+        
 
         divCrypto.innerHTML += `<div class="card-body">
                                     <h5 class="card-title">${Cryptos[cryptoSelected.value].nombre}</h5>
@@ -87,10 +89,6 @@ const crearCards = () => {
                                 </div>`
 
         cardsCryptos.appendChild(divCrypto);
-}
-
-const eliminarCryptomoneda = () => {
-    const deleteTarget = this.parentElement;
 }
 
 
@@ -131,18 +129,15 @@ const calcularCompra = () => {
 
 
 // C R E A D O R    D E    C A R D S
-
+let id = 0
 const agregarPortfolio = () => {
-    ShoppingCart.push(new cryptomoneda(Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
+    ShoppingCart.push(new cryptomoneda(id+=1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
     
         const divCrypto = document.createElement("div");
             divCrypto.classList.add("customCard", "cardShadow");
     
-            const cardBody = document.createElement("div");
-            cardBody.classList.add("card-body");
     
-    
-            divCrypto.innerHTML += `<div class="card-body">
+            divCrypto.innerHTML += `
                                         <h5 class="card-title">${Cryptos[cryptoSelected.value].nombre}</h5>
                                         <ul>
                                             <li>
@@ -156,8 +151,21 @@ const agregarPortfolio = () => {
                                             </li>
                                         </ul>
     
-                                        <input type="button" class="btn btn-danger" id="eliminarCrypto" value="Eliminar" onclick="eliminarCryptomoneda()"></input>
-                                    </div>`
+                                        <input type="button" class="btn btn-danger" id="${id}" value="Eliminar"></input>
+                                    `
     
             cardsCryptos.appendChild(divCrypto);
+
+            
+
+            let btnEliminar= document.getElementById(`${id}`)
+
+            btnEliminar.addEventListener('click', ()=>{
+                btnEliminar.parentElement.remove()
+                
+                ShoppingCart = ShoppingCart.filter(item => item.id != btnEliminar.id)
+
+            })
+
+            document.getElementById('addCryptoForm').reset();
 }
