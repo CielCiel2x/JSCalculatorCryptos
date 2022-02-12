@@ -58,45 +58,10 @@ const search = (term) => {
     }
 }
 
+//F U N C I O N E S   C A R D S
 
-// C A L C U L A R   D O L A R E S
-
-const fiatSelected = document.querySelector('#monedaFiat');
-
-fiatSelected.addEventListener('change', (moneda) => {
-
-    var valorDolar = plataFiat[moneda.target.value].valorDolar;
-    var cantidadPesos = document.querySelector("#cantidadPesos").value;
-    const cantidadDolares = dividir(cantidadPesos, valorDolar);
-    const resultado = document.querySelector('.resultadoDolares');
-    resultado.textContent = `${cantidadDolares.toFixed(2)}`;
-});
-
-
-// C A L C U L A D O R A
-
-const cryptoSelected = document.querySelector('#selectCrypto');
-
-cryptoSelected.addEventListener('change', (seleccionCrypto) => {
-    var precioCryptomoneda = Cryptos[seleccionCrypto.target.value].precio;
-    document.querySelector("#precioCrypto").value = precioCryptomoneda;
-})
-
-const calcularCompra = () => {
-    let precioCrypto = document.querySelector("#precioCrypto").value;
-    let inversionEnDolares = document.querySelector("#usdCrypto").value;
-    let cantidadComprada = dividir(inversionEnDolares, precioCrypto);
-    document.querySelector("#tuCompra").value = cantidadComprada;
-
-    Cryptos[cryptoSelected.value].compraUsd = inversionEnDolares;
-    Cryptos[cryptoSelected.value].compraDeCrypto = cantidadComprada;
-    console.log(Cryptos[cryptoSelected.value])
-}
-
-
-// C R E A D O R    D E    C A R D S
-
-const agregarPortfolio = () => {
+const crearCards = () => {
+    
     const divCrypto = document.createElement("div");
         divCrypto.classList.add("customCard", "cardShadow");
 
@@ -117,8 +82,82 @@ const agregarPortfolio = () => {
                                         tendrias ${Cryptos[cryptoSelected.value].compraDeCrypto} ${Cryptos[cryptoSelected.value].nombre}
                                         </li>
                                     </ul>
+
+                                    <input type="button" class="btn btn-danger" id="eliminarCrypto" value="Eliminar" onclick="eliminarCryptomoneda()"></input>
                                 </div>`
 
         cardsCryptos.appendChild(divCrypto);
+}
 
+const eliminarCryptomoneda = () => {
+    const deleteTarget = this.parentElement;
+}
+
+
+// C A L C U L A R   D O L A R E S
+
+const fiatSelected = document.querySelector('#monedaFiat');
+
+fiatSelected.addEventListener('change', (moneda) => {
+
+    let valorDolar = plataFiat[moneda.target.value].valorDolar;
+    let cantidadPesos = document.querySelector("#cantidadPesos").value;
+    const cantidadDolares = dividir(cantidadPesos, valorDolar);
+    const resultado = document.querySelector('.resultadoDolares');
+    resultado.textContent = `${cantidadDolares.toFixed(2)}`;
+});
+
+
+// C A L C U L A D O R A
+
+const nombreCrypto = document.querySelector('#selectCrypto').nombre;
+
+const cryptoSelected = document.querySelector('#selectCrypto');
+
+cryptoSelected.addEventListener('change', (seleccionCrypto) => {
+    let precioCryptomoneda = Cryptos[seleccionCrypto.target.value].precio;
+    document.querySelector("#precioCrypto").value = precioCryptomoneda;
+})
+
+const calcularCompra = () => {
+    let precioCrypto = document.querySelector("#precioCrypto").value;
+    let inversionEnDolares = document.querySelector("#usdCrypto").value;
+    let cantidadComprada = dividir(inversionEnDolares, precioCrypto);
+    document.querySelector("#tuCompra").value = cantidadComprada;
+
+    Cryptos[cryptoSelected.value].compraUsd = inversionEnDolares;
+    Cryptos[cryptoSelected.value].compraDeCrypto = cantidadComprada;
+}
+
+
+// C R E A D O R    D E    C A R D S
+
+const agregarPortfolio = () => {
+    ShoppingCart.push(new cryptomoneda(Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
+    
+        const divCrypto = document.createElement("div");
+            divCrypto.classList.add("customCard", "cardShadow");
+    
+            const cardBody = document.createElement("div");
+            cardBody.classList.add("card-body");
+    
+    
+            divCrypto.innerHTML += `<div class="card-body">
+                                        <h5 class="card-title">${Cryptos[cryptoSelected.value].nombre}</h5>
+                                        <ul>
+                                            <li>
+                                            precio: ${Cryptos[cryptoSelected.value].precio}
+                                            </li>
+                                            <li>
+                                            tu compra en dolares: ${Cryptos[cryptoSelected.value].compraUsd}
+                                            </li>
+                                            <li>
+                                            tendrias ${Cryptos[cryptoSelected.value].compraDeCrypto} ${Cryptos[cryptoSelected.value].nombre}
+                                            </li>
+                                        </ul>
+    
+                                        <input type="button" class="btn btn-danger" id="eliminarCrypto" value="Eliminar" onclick="eliminarCryptomoneda()"></input>
+                                    </div>`
+    
+            cardsCryptos.appendChild(divCrypto);
 }
