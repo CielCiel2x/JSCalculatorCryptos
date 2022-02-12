@@ -127,8 +127,14 @@ const calcularCompra = () => {
     Cryptos[cryptoSelected.value].compraDeCrypto = cantidadComprada;
 }
 
+let calcularCrypto = document.getElementById('calcularCrypto');
+
+calcularCrypto.addEventListener('click', () => {
+    calcularCompra();
+})
 
 // C R E A D O R    D E    C A R D S
+
 let id = 0
 const agregarPortfolio = () => {
     ShoppingCart.push(new cryptomoneda(id+=1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
@@ -169,3 +175,10 @@ const agregarPortfolio = () => {
 
             document.getElementById('addCryptoForm').reset();
 }
+
+let addPortfolio = document.getElementById('agregarCrypto');
+
+addPortfolio.addEventListener('click', () => {
+    agregarPortfolio();
+})
+

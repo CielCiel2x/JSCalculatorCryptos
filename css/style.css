@@ -63,6 +63,7 @@ input[type="number"] {
       width: 500px;
       display: flex;
       flex-direction: column;
+      padding: 3em;
   }
 
   .card-body {
@@ -99,7 +100,7 @@ input[type="number"] {
     display: flex;
     flex-direction: row;
     gap: 1.3em;
-    margin-top: 3em;
+    margin: 3em;
   }
 
   .form-group {
