@@ -14,9 +14,6 @@ const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
 
 let ShoppingCart = [];
 
-
-const cardsCryptos = document.querySelector("#cryptoShoppingCart");
-
 // C O N S T R U C T O R
 
 class cryptomoneda {
@@ -58,39 +55,6 @@ const search = (term) => {
         console.log(`Ingrese un termino de busqueda`);
     }
 }
-
-//F U N C I O N E S   C A R D S
-
-const crearCards = () => {
-    
-    const divCrypto = document.createElement("div");
-        divCrypto.classList.add("customCard", "cardShadow");
-
-        const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
-
-        
-
-        divCrypto.innerHTML += `<div class="card-body">
-                                    <h5 class="card-title">${Cryptos[cryptoSelected.value].nombre}</h5>
-                                    <ul>
-                                        <li>
-                                        precio: ${Cryptos[cryptoSelected.value].precio}
-                                        </li>
-                                        <li>
-                                        tu compra en dolares: ${Cryptos[cryptoSelected.value].compraUsd}
-                                        </li>
-                                        <li>
-                                        tendrias ${Cryptos[cryptoSelected.value].compraDeCrypto} ${Cryptos[cryptoSelected.value].nombre}
-                                        </li>
-                                    </ul>
-
-                                    <input type="button" class="btn btn-danger" id="eliminarCrypto" value="Eliminar" onclick="eliminarCryptomoneda()"></input>
-                                </div>`
-
-        cardsCryptos.appendChild(divCrypto);
-}
-
 
 // C A L C U L A R   D O L A R E S
 
@@ -135,11 +99,13 @@ calcularCrypto.addEventListener('click', () => {
 
 // C R E A D O R    D E    C A R D S
 
+const cardsCryptos = document.querySelector("#cryptoShoppingCart");
+
 let id = 0
-const agregarPortfolio = () => {
+const agregarCarrito = () => {
     ShoppingCart.push(new cryptomoneda(id+=1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
     
-        const divCrypto = document.createElement("div");
+        var divCrypto = document.createElement("div");
             divCrypto.classList.add("customCard", "cardShadow");
     
     
@@ -179,6 +145,67 @@ const agregarPortfolio = () => {
 let addPortfolio = document.getElementById('agregarCrypto');
 
 addPortfolio.addEventListener('click', () => {
-    agregarPortfolio();
+    agregarCarrito();
 })
+
+// A G R E G A R   A   P O R T F O L I O   P E R M A N E N T E
+var today = new Date();
+var date = `${today.getDate()}/${(today.getMonth()+1)}/${today.getFullYear()} - ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
+
+const HistorialCompras = () => {
+    localStorage.setItem(`${date}`, JSON.stringify(ShoppingCart));
+}
+
+let guardarHistorico = document.getElementById('guardarHistorico');
+
+guardarHistorico.addEventListener('click', () => {
+    HistorialCompras();
+
+    ShoppingCart = [];
+    cardsCryptos.innerHTML = ``;
+});
+
+let borrarHistorial = document.getElementById("borrarHistorial");
+
+borrarHistorial.addEventListener('click', () => {
+    localStorage.clear();
+
+    let modalBody = document.querySelector("#modalHistorialBody");
+    modalBody.innerHTML = '';
+});
+
+// C O M P R A S   H I S T O R I C A S
+
+const historialDeCompras = [];
+
+
+const mostrarTodoHistorial = () => {
+    var historialCompleto = [],
+    keysHistorial = Object.keys(localStorage);
+    i = keysHistorial.length;
+    while (i--) {
+        historialCompleto.push(JSON.parse(localStorage.getItem(keysHistorial[i])));
+    }
+    historialCompleto.forEach(compra => {
+        compra.forEach(monedaComprada => {
+            const modalHistorial = document.querySelector("#modalHistorialBody");
+
+            modalHistorial.innerHTML += `
+                                        <div class="card cardShadow">
+                                        <div class="card-body">
+                                        <h5 class="card-title">${monedaComprada.nombre}</h5>
+                                        <p class="card-text">compraste ${monedaComprada.compraCrypto} de ${monedaComprada.nombre} que equivale a $${monedaComprada.compraUsd} usd</p>
+                                        </div>
+                                        </div>`
+        })
+    })
+}
+
+const verHistorialCompleto = document.querySelector("#verComprasHistoricas");
+
+verHistorialCompleto.addEventListener('click', () => {
+    mostrarTodoHistorial();
+})
+
 

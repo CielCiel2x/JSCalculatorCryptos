@@ -149,3 +149,17 @@ input[type="number"] {
 .calculadoraDolar form select {
   height: 25px;
 }
+
+.completePortfolio {
+  display: flex;
+  flex-direction: column;
+}
+
+.permanentAddPortfolio {
+  width: 250px;
+  margin: auto;
+}
+
+.card { 
+  margin-bottom: 1.2em;
+}
