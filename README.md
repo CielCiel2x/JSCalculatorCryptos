@@ -1,6 +1,6 @@
 # JSCalculatorCryptos
 
-keep track of all your cryptocurrencies transactions.
+keep track of all your cryptocurrencies transactions and calculate your USD's based on your country currency.
 
-# Languages
+# Languages used
 Javascript mainly, html and css just for styling.
