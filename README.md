@@ -2,5 +2,5 @@
 
 keep track of all your cryptocurrencies transactions.
 
-# LanguagesCancel changes
+# Languages
 Javascript mainly, html and css just for styling.
