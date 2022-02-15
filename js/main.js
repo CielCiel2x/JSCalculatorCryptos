@@ -11,9 +11,6 @@ const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
 { pais: "Brasil", moneda: "BRL", valorDolar: 5 },
 { pais: "Colombia", moneda: "COP", valorDolar: 3933 },]
 
-
-let ShoppingCart = [];
-
 // C O N S T R U C T O R
 
 class cryptomoneda {
@@ -38,22 +35,6 @@ const restar = (num1, num2) => {
     let resultadoResta;
     resultadoResta = num1 - num2;
     return resultadoResta; // RESTAR
-}
-
-
-//F U N C I O N   S E A R C H
-
-const search = (term) => {
-    term = prompt(`Qué criptomoneda desea buscar?`);
-    let resultadoBusqueda = Cryptos.filter((elementos) => elementos.nombre.includes(term));
-
-    if (resultadoBusqueda.length == 0) {
-        console.log(`no existe la moneda que buscas`);
-    } else if (resultadoBusqueda.length >= 1) {
-        console.log(resultadoBusqueda);
-    } else {
-        console.log(`Ingrese un termino de busqueda`);
-    }
 }
 
 // C A L C U L A R   D O L A R E S
@@ -98,6 +79,8 @@ calcularCrypto.addEventListener('click', () => {
 })
 
 // C R E A D O R    D E    C A R D S
+
+let ShoppingCart = [];
 
 const cardsCryptos = document.querySelector("#cryptoShoppingCart");
 
