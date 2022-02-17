@@ -170,10 +170,11 @@ const mostrarTodoHistorial = () => {
     while (i--) {
         historialCompleto.push(JSON.parse(localStorage.getItem(keysHistorial[i])));
     }
+    const modalHistorial = document.querySelector("#modalHistorialBody");
+    
+    modalHistorial.innerHTML = ``;
     historialCompleto.forEach(compra => {
         compra.forEach(monedaComprada => {
-            const modalHistorial = document.querySelector("#modalHistorialBody");
-
             modalHistorial.innerHTML += `
                                         <div class="card cardShadow">
                                         <div class="card-body">
