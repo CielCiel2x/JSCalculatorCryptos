@@ -102,7 +102,7 @@ const agregarCarrito = () => {
                                             tu compra en dolares: ${Cryptos[cryptoSelected.value].compraUsd}
                                             </li>
                                             <li>
-                                            tendrias ${Cryptos[cryptoSelected.value].compraDeCrypto} ${Cryptos[cryptoSelected.value].nombre}
+                                            tendrias ${Cryptos[cryptoSelected.value].compraDeCrypto.toFixed(5)} ${Cryptos[cryptoSelected.value].nombre}
                                             </li>
                                         </ul>
     

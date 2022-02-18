@@ -14,6 +14,47 @@ svg {
   height: auto;
 }
 
+body {
+  background: #100a1c;
+  background-image:
+    radial-gradient(50% 30% ellipse at center top, #201e40 0%, rgba(0,0,0,0) 100%),
+    radial-gradient(60% 50% ellipse at center bottom, #261226 0%, #100a1c 100%);
+  background-attachment: fixed;
+  color: #6cacc5;
+    font: 300 18px/1.6 "Source Sans Pro",sans-serif;
+    margin: 0;
+    padding: 5em 0 2em;
+}
+
+#tuCompra,
+#precioCrypto,
+#usdCrypto,
+#selectCrypto,
+#monedaFiat
+{
+    background: transparent;
+    border: 1px solid #6cacc5;
+}
+
+.btn-outline-dark {
+  color: #6cacc5;
+  border: 1px solid #6cacc5;
+}
+
+.btn-outline-dark:hover {
+  background: #6cacc5;
+  border: 1px solid #6cacc5;
+}
+
+.btn-success {
+  background: rgb(135, 252, 207);
+  color:rgb(0, 25, 71)
+}
+
+form input {
+  background-color: rgba(0,0,0,0);
+}
+
 textarea:focus,
 input:focus {
   outline: none;
@@ -29,8 +70,10 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+
 .cardShadow {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 2px solid #6cacc5;
+    box-shadow: rgba(88, 88, 88, 0.425) 0px 5px 15px;
 }
 
 .fiatCalculator {
@@ -78,7 +121,7 @@ input[type="number"] {
 
 .resultadoDolares {
   font-weight: 600;
-  color: green;
+  color: rgb(135, 252, 207);
 }
 
 
@@ -124,6 +167,10 @@ input[type="number"] {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  border: 5px solid #6cacc5;
+  border-radius: 10px;
+  margin: .8em 5em;
+  padding: 3em;
 }
 
 .cryptoCalculator {
@@ -135,6 +182,7 @@ input[type="number"] {
 
   .cryptoCalculator h4 {
     margin-bottom: 1.3em;
+    
   }
 
   .card-deck {
@@ -145,7 +193,7 @@ input[type="number"] {
   }
 
   .customCard {
-      width: 500px;
+      width: 350px;
       display: flex;
       flex-direction: column;
       padding: 3em;
@@ -157,6 +205,7 @@ input[type="number"] {
     align-self: center;
     justify-content: center;
     align-items: center;
+    text-align: left;
   }
 
   .card-title {
@@ -173,3 +222,4 @@ input[type="number"] {
   ul li span {
     font-weight: 800;
   }
+
