@@ -34,6 +34,7 @@ body {
 {
     background: transparent;
     border: 1px solid #6cacc5;
+    color: #6cacc5;
 }
 
 .btn-outline-dark {
@@ -44,6 +45,7 @@ body {
 .btn-outline-dark:hover {
   background: #6cacc5;
   border: 1px solid #6cacc5;
+  color: #940056;
 }
 
 .btn-success {
@@ -58,6 +60,7 @@ form input {
 textarea:focus,
 input:focus {
   outline: none;
+  color: #6cacc5;
 }
 
 input::-webkit-outer-spin-button,

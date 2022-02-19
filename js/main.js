@@ -15,7 +15,7 @@ const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
 
 class cryptomoneda {
     constructor(id,nombre, precio, compraUsd, compraCrypto) {
-        this.id=id
+        this.id=id;
         this.nombre = nombre; // nombre de la cripto, a sacar por API
         this.precio = parseFloat(precio); // precio de la cripto, a sacar por API
         this.compraUsd = compraUsd;
@@ -84,7 +84,9 @@ let ShoppingCart = [];
 
 const cardsCryptos = document.querySelector("#cryptoShoppingCart");
 
-let id = 0
+ 
+
+let id = 0;
 const agregarCarrito = () => {
     ShoppingCart.push(new cryptomoneda(id+=1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
     
@@ -173,7 +175,9 @@ const mostrarTodoHistorial = () => {
     const modalHistorial = document.querySelector("#modalHistorialBody");
     
     modalHistorial.innerHTML = ``;
-    historialCompleto.forEach(compra => {
+
+    const historialData = () => {
+        historialCompleto.forEach(compra => {
         compra.forEach(monedaComprada => {
             modalHistorial.innerHTML += `
                                         <div class="card cardShadow">
@@ -184,6 +188,20 @@ const mostrarTodoHistorial = () => {
                                         </div>`
         })
     })
+}
+
+const noHistorial = () => {
+        modalHistorial.innerHTML += `
+                                    <div class="card cardShadow">
+                                    <div class="card-body">
+                                        <p class="card-text">No tenes compras realizadas.</p>
+                                    </div>
+                                    </div>`
+}
+
+const hayHistorial = localStorage.length > 0;
+
+hayHistorial ? historialData() : noHistorial();
 }
 
 const verHistorialCompleto = document.querySelector("#verComprasHistoricas");
