@@ -62,12 +62,12 @@ cryptoSelected.addEventListener('change', (seleccionCrypto) => {
     document.querySelector("#precioCrypto").value = precioCryptomoneda;
 })
 
+
 const calcularCompra = () => {
     let precioCrypto = document.querySelector("#precioCrypto").value;
-    let inversionEnDolares = document.querySelector("#usdCrypto").value;
+    var inversionEnDolares = document.querySelector("#usdCrypto").value;
     let cantidadComprada = dividir(inversionEnDolares, precioCrypto);
     document.querySelector("#tuCompra").value = cantidadComprada;
-
     Cryptos[cryptoSelected.value].compraUsd = inversionEnDolares;
     Cryptos[cryptoSelected.value].compraDeCrypto = cantidadComprada;
 }
@@ -75,7 +75,15 @@ const calcularCompra = () => {
 let calcularCrypto = document.getElementById('calcularCrypto');
 
 calcularCrypto.addEventListener('click', () => {
-    calcularCompra();
+    inversionEnDolares = document.querySelector("#usdCrypto").value;
+    inversionEnDolares > 0 ? calcularCompra() :
+    Swal.fire({
+        title: 'Error!',
+        text: 'tu inversion no puede ser menor a 1 usd o no elegiste una criptomoneda',
+        icon: 'error',
+        confirmButtonText: 'cerrar'
+      })
+
 })
 
 // C R E A D O R    D E    C A R D S
@@ -146,9 +154,14 @@ let guardarHistorico = document.getElementById('guardarHistorico');
 
 guardarHistorico.addEventListener('click', () => {
     HistorialCompras();
-
     ShoppingCart = [];
     cardsCryptos.innerHTML = ``;
+    Swal.fire({
+        title: 'Compra guardada!',
+        text: 'Do you want to continue',
+        icon: 'success',
+        confirmButtonText: 'cerrar'
+      })
 });
 
 let borrarHistorial = document.getElementById("borrarHistorial");
@@ -208,6 +221,6 @@ const verHistorialCompleto = document.querySelector("#verComprasHistoricas");
 
 verHistorialCompleto.addEventListener('click', () => {
     mostrarTodoHistorial();
+
+
 })
-
-
