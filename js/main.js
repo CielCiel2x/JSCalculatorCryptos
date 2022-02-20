@@ -204,11 +204,14 @@ const mostrarTodoHistorial = () => {
 
     historialCompleto.forEach(compra => {
         compra.forEach(monedaComprada => {
+
+            let {nombre, compraUsd, compraCrypto} = monedaComprada;
+
             modalHistorial.innerHTML += `
                                         <div class="card cardShadow">
                                         <div class="card-body">
-                                        <h5 class="card-title">${monedaComprada.nombre}</h5>
-                                        <p class="card-text">compraste ${monedaComprada.compraCrypto} de ${monedaComprada.nombre} que equivale a $${monedaComprada.compraUsd} usd</p>
+                                        <h5 class="card-title">${nombre}</h5>
+                                        <p class="card-text">compraste ${compraCrypto} de ${nombre} que equivale a $${compraUsd} usd</p>
                                         </div>
                                         </div>`
         })
