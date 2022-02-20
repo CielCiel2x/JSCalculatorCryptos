@@ -14,8 +14,8 @@ const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
 // C O N S T R U C T O R
 
 class cryptomoneda {
-    constructor(id,nombre, precio, compraUsd, compraCrypto) {
-        this.id=id;
+    constructor(id, nombre, precio, compraUsd, compraCrypto) {
+        this.id = id;
         this.nombre = nombre; // nombre de la cripto, a sacar por API
         this.precio = parseFloat(precio); // precio de la cripto, a sacar por API
         this.compraUsd = compraUsd;
@@ -68,6 +68,7 @@ const calcularCompra = () => {
     var inversionEnDolares = document.querySelector("#usdCrypto").value;
     let cantidadComprada = dividir(inversionEnDolares, precioCrypto);
     document.querySelector("#tuCompra").value = cantidadComprada;
+
     Cryptos[cryptoSelected.value].compraUsd = inversionEnDolares;
     Cryptos[cryptoSelected.value].compraDeCrypto = cantidadComprada;
 }
@@ -77,12 +78,12 @@ let calcularCrypto = document.getElementById('calcularCrypto');
 calcularCrypto.addEventListener('click', () => {
     inversionEnDolares = document.querySelector("#usdCrypto").value;
     inversionEnDolares > 0 ? calcularCompra() :
-    Swal.fire({
-        title: 'Error!',
-        text: 'tu inversion no puede ser menor a 1 usd o no elegiste una criptomoneda',
-        icon: 'error',
-        confirmButtonText: 'cerrar'
-      })
+        Swal.fire({
+            title: 'Error!',
+            text: 'tu inversion no puede ser menor a 1 usd o no elegiste una criptomoneda',
+            icon: 'error',
+            confirmButtonText: 'cerrar'
+        })
 
 })
 
@@ -92,17 +93,17 @@ let ShoppingCart = [];
 
 const cardsCryptos = document.querySelector("#cryptoShoppingCart");
 
- 
+
 
 let id = 0;
 const agregarCarrito = () => {
-    ShoppingCart.push(new cryptomoneda(id+=1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
-    
-        var divCrypto = document.createElement("div");
-            divCrypto.classList.add("customCard", "cardShadow");
-    
-    
-            divCrypto.innerHTML += `
+    ShoppingCart.push(new cryptomoneda(id += 1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
+
+    var divCrypto = document.createElement("div");
+    divCrypto.classList.add("customCard", "cardShadow");
+
+
+    divCrypto.innerHTML += `
                                         <h5 class="card-title">${Cryptos[cryptoSelected.value].nombre}</h5>
                                         <ul>
                                             <li>
@@ -118,21 +119,21 @@ const agregarCarrito = () => {
     
                                         <input type="button" class="btn btn-danger" id="${id}" value="Eliminar"></input>
                                     `
-    
-            cardsCryptos.appendChild(divCrypto);
 
-            
+    cardsCryptos.appendChild(divCrypto);
 
-            let btnEliminar= document.getElementById(`${id}`)
 
-            btnEliminar.addEventListener('click', ()=>{
-                btnEliminar.parentElement.remove()
-                
-                ShoppingCart = ShoppingCart.filter(item => item.id != btnEliminar.id)
 
-            })
+    let btnEliminar = document.getElementById(`${id}`)
 
-            document.getElementById('addCryptoForm').reset();
+    btnEliminar.addEventListener('click', () => {
+        btnEliminar.parentElement.remove()
+
+        ShoppingCart = ShoppingCart.filter(item => item.id != btnEliminar.id)
+
+    })
+
+    document.getElementById('addCryptoForm').reset();
 }
 
 let addPortfolio = document.getElementById('agregarCrypto');
@@ -143,7 +144,7 @@ addPortfolio.addEventListener('click', () => {
 
 // A G R E G A R   A   P O R T F O L I O   P E R M A N E N T E
 var today = new Date();
-var date = `${today.getDate()}/${(today.getMonth()+1)}/${today.getFullYear()} - ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+var date = `${today.getDate()}/${(today.getMonth() + 1)}/${today.getFullYear()} - ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
 
 const HistorialCompras = () => {
@@ -154,14 +155,26 @@ let guardarHistorico = document.getElementById('guardarHistorico');
 
 guardarHistorico.addEventListener('click', () => {
     HistorialCompras();
+
+    ShoppingCart.length > 0 ?
+        Swal.fire({
+            title: 'Compra guardada!',
+            text: 'Do you want to continue',
+            icon: 'success',
+            confirmButtonText: 'cerrar'
+        })
+
+        :
+
+        Swal.fire({
+            title: 'No agregaste ninguna compra!',
+            text: 'calculá alguna moneda y agregala al carrito',
+            icon: 'error',
+            confirmButtonText: 'cerrar'
+        })
+
     ShoppingCart = [];
     cardsCryptos.innerHTML = ``;
-    Swal.fire({
-        title: 'Compra guardada!',
-        text: 'Do you want to continue',
-        icon: 'success',
-        confirmButtonText: 'cerrar'
-      })
 });
 
 let borrarHistorial = document.getElementById("borrarHistorial");
@@ -180,17 +193,16 @@ const historialDeCompras = [];
 
 const mostrarTodoHistorial = () => {
     var historialCompleto = [],
-    keysHistorial = Object.keys(localStorage);
+        keysHistorial = Object.keys(localStorage);
     i = keysHistorial.length;
     while (i--) {
         historialCompleto.push(JSON.parse(localStorage.getItem(keysHistorial[i])));
     }
     const modalHistorial = document.querySelector("#modalHistorialBody");
-    
+
     modalHistorial.innerHTML = ``;
 
-    const historialData = () => {
-        historialCompleto.forEach(compra => {
+    historialCompleto.forEach(compra => {
         compra.forEach(monedaComprada => {
             modalHistorial.innerHTML += `
                                         <div class="card cardShadow">
@@ -203,24 +215,17 @@ const mostrarTodoHistorial = () => {
     })
 }
 
-const noHistorial = () => {
-        modalHistorial.innerHTML += `
-                                    <div class="card cardShadow">
-                                    <div class="card-body">
-                                        <p class="card-text">No tenes compras realizadas.</p>
-                                    </div>
-                                    </div>`
-}
-
-const hayHistorial = localStorage.length > 0;
-
-hayHistorial ? historialData() : noHistorial();
-}
-
 const verHistorialCompleto = document.querySelector("#verComprasHistoricas");
 
 verHistorialCompleto.addEventListener('click', () => {
-    mostrarTodoHistorial();
 
+    const hayHistorial = localStorage.length > 0;
+
+    hayHistorial ? mostrarTodoHistorial() : Swal.fire({
+        title: 'No tenes compras realizadas',
+        text: 'Realizá compras para poder verlas acá',
+        icon: 'error',
+        confirmButtonText: 'cerrar'
+    });
 
 })
