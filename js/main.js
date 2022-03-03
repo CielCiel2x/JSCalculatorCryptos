@@ -1,16 +1,3 @@
-const Cryptos = [{ nombre: "Ethereum", precio: 2712.37, compraUsd: 0, compraDeCrypto: 0 },
-{ nombre: "Bitcoin", precio: 37651.36, compraUsd: 0, compraDeCrypto: 0 },
-{ nombre: "Solana", precio: 111.44, compraUsd: 0, compraDeCrypto: 0 },
-{ nombre: "Cardano", precio: 1.06, compraUsd: 0, compraDeCrypto: 0 },
-{ nombre: "XMR", precio: 0.75, compraUsd: 0, compraDeCrypto: 0 },
-{ nombre: "BNB", precio: 376.73, compraUsd: 0, compraDeCrypto: 0 }];
-
-
-const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
-{ pais: "Chile", moneda: "CLP", valorDolar: 813 },
-{ pais: "Brasil", moneda: "BRL", valorDolar: 5 },
-{ pais: "Colombia", moneda: "COP", valorDolar: 3933 },]
-
 // C O N S T R U C T O R
 
 class cryptomoneda {
@@ -22,6 +9,46 @@ class cryptomoneda {
         this.compraCrypto = compraCrypto;
     }
 }
+
+
+// A P I   O F   C R Y P T O P R I C E S
+
+const Cryptos = [];
+
+fetch("https://api.coingecko.com/api/v3/simple/price?ids=Bitcoin%2CEthereum%2CMonero%2CCardano%2CSolana%2CPolkadot%2CDogecoin&vs_currencies=USD&include_24hr_change=true")
+    .then((response) => response.json())
+    .then((data) => {
+        var entriesKeys = Object.keys(data);
+        var entriesValues = Object.values(data);
+
+
+        for (let i = 0; i < entriesKeys.length; i++) {
+            Cryptos.push(new cryptomoneda(undefined, entriesKeys[i], entriesValues[i].usd, 0, 0));
+        }
+
+
+        for (let i = 0; i < Cryptos.length; i++) {
+            let selectCryptoMenu = document.querySelector('#selectCrypto');
+            let option = document.createElement('option');
+            option.value = i;
+    
+            option.innerHTML += `${Cryptos[i].nombre}`;
+            selectCryptoMenu.appendChild(option);
+
+        }
+    });
+
+
+
+
+
+
+const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
+{ pais: "Chile", moneda: "CLP", valorDolar: 813 },
+{ pais: "Brasil", moneda: "BRL", valorDolar: 5 },
+{ pais: "Colombia", moneda: "COP", valorDolar: 3933 },]
+
+
 
 // F U N C I O N E S   B A S I C A S
 
@@ -99,11 +126,11 @@ let id = 0;
 const agregarCarrito = () => {
     ShoppingCart.push(new cryptomoneda(id += 1, Cryptos[cryptoSelected.value].nombre, Cryptos[cryptoSelected.value].precio, Cryptos[cryptoSelected.value].compraUsd, Cryptos[cryptoSelected.value].compraDeCrypto));
 
-    var divCrypto = document.createElement("div");
-    divCrypto.classList.add("customCard", "cardShadow");
+    var SelectCrypto = document.createElement("div");
+    SelectCrypto.classList.add("customCard", "cardShadow");
 
 
-    divCrypto.innerHTML += `
+    SelectCrypto.innerHTML += `
                                         <h5 class="card-title">${Cryptos[cryptoSelected.value].nombre}</h5>
                                         <ul>
                                             <li>
@@ -120,7 +147,7 @@ const agregarCarrito = () => {
                                         <input type="button" class="btn btn-danger" id="${id}" value="Eliminar"></input>
                                     `
 
-    cardsCryptos.appendChild(divCrypto);
+    cardsCryptos.appendChild(SelectCrypto);
 
 
 
@@ -205,7 +232,7 @@ const mostrarTodoHistorial = () => {
     historialCompleto.forEach(compra => {
         compra.forEach(monedaComprada => {
 
-            let {nombre, compraUsd, compraCrypto} = monedaComprada;
+            let { nombre, compraUsd, compraCrypto } = monedaComprada;
 
             modalHistorial.innerHTML += `
                                         <div class="card cardShadow">
