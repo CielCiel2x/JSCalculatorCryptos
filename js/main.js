@@ -31,7 +31,7 @@ fetch("https://api.coingecko.com/api/v3/simple/price?ids=Bitcoin%2CEthereum%2CMo
             let selectCryptoMenu = document.querySelector('#selectCrypto');
             let option = document.createElement('option');
             option.value = i;
-    
+
             option.innerHTML += `${Cryptos[i].nombre}`;
             selectCryptoMenu.appendChild(option);
 
@@ -40,13 +40,43 @@ fetch("https://api.coingecko.com/api/v3/simple/price?ids=Bitcoin%2CEthereum%2CMo
 
 
 
+// F I A T   C U R R E N C Y
+
+
+const plataFiat = [];
 
 
 
-const plataFiat = [{ pais: "Argentina", moneda: "ARS", valorDolar: 200 },
-{ pais: "Chile", moneda: "CLP", valorDolar: 813 },
-{ pais: "Brasil", moneda: "BRL", valorDolar: 5 },
-{ pais: "Colombia", moneda: "COP", valorDolar: 3933 },]
+class fiatCurrency {
+    constructor(moneda, valorDolar) {
+        this.moneda = moneda;
+        this.valorDolar = parseFloat(valorDolar);
+    }
+}
+
+
+fetch("https://freecurrencyapi.net/api/v2/latest?apikey=bfa7e220-9b31-11ec-9e10-fb7b2f0f505f")
+    .then((response) => response.json())
+    .then((data) => {
+        var entriesKeys = Object.keys(data.data);
+        var entriesValues = Object.values(data.data);
+
+
+        for (let i = 0; i < entriesKeys.length; i++) {
+            plataFiat.push(new fiatCurrency(entriesKeys[i], entriesValues[i],));
+        }
+
+
+        for (let i = 0; i < plataFiat.length; i++) {
+            let selectFiatMenu = document.querySelector('#monedaFiat');
+            let option = document.createElement('option');
+            option.value = i;
+
+            option.innerHTML += `${plataFiat[i].moneda}`;
+            selectFiatMenu.appendChild(option);
+
+        }
+    });
 
 
 
@@ -64,6 +94,8 @@ const restar = (num1, num2) => {
     return resultadoResta; // RESTAR
 }
 
+
+
 // C A L C U L A R   D O L A R E S
 
 const fiatSelected = document.querySelector('#monedaFiat');
@@ -76,6 +108,7 @@ fiatSelected.addEventListener('change', (moneda) => {
     const resultado = document.querySelector('.resultadoDolares');
     resultado.textContent = `${cantidadDolares.toFixed(2)}`;
 });
+
 
 
 // C A L C U L A D O R A
@@ -113,6 +146,8 @@ calcularCrypto.addEventListener('click', () => {
         })
 
 })
+
+
 
 // C R E A D O R    D E    C A R D S
 
