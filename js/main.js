@@ -123,7 +123,7 @@ cryptoSelected.addEventListener('change', (seleccionCrypto) => {
 
 
 const calcularCompra = () => {
-    let precioCrypto = document.querySelector("#precioCrypto").value;
+    var precioCrypto = document.querySelector("#precioCrypto").value;
     var inversionEnDolares = document.querySelector("#usdCrypto").value;
     let cantidadComprada = dividir(inversionEnDolares, precioCrypto);
     document.querySelector("#tuCompra").value = cantidadComprada;
@@ -199,8 +199,20 @@ const agregarCarrito = () => {
 
 let addPortfolio = document.getElementById('agregarCrypto');
 
+
 addPortfolio.addEventListener('click', () => {
-    agregarCarrito();
+     precioCrypto = document.querySelector("#precioCrypto").value;
+     inversionEnDolares = document.querySelector("#usdCrypto").value;
+     tuCompra = document.querySelector("#tuCompra").value;
+
+    ((precioCrypto > 0) && (precioCrypto != undefined) && (precioCrypto != null)  &&(inversionEnDolares > 0) && (inversionEnDolares != undefined) && (inversionEnDolares != null) && (tuCompra > 0) && (tuCompra != null) && (tuCompra != undefined)) ? agregarCarrito() : 
+    Swal.fire({
+        title: 'Calculá tu compra!',
+        text: 'Asegurate de completar los campos y calcular la compra para verificar la cantidad a comprar',
+        icon: 'error',
+        confirmButtonText: 'cerrar'
+    })
+
 })
 
 // A G R E G A R   A   P O R T F O L I O   P E R M A N E N T E
