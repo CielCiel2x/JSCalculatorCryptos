@@ -55,7 +55,7 @@ class fiatCurrency {
 }
 
 
-fetch("https://freecurrencyapi.net/api/v2/latest?apikey=bfa7e220-9b31-11ec-9e10-fb7b2f0f505f")
+fetch("https://api.currencyapi.com/v3/latest?apikey=bfa7e220-9b31-11ec-9e10-fb7b2f0f505f")
     .then((response) => response.json())
     .then((data) => {
         var entriesKeys = Object.keys(data.data);
