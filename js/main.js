@@ -58,12 +58,11 @@ class fiatCurrency {
 fetch("https://api.currencyapi.com/v3/latest?apikey=bfa7e220-9b31-11ec-9e10-fb7b2f0f505f")
     .then((response) => response.json())
     .then((data) => {
-        var entriesKeys = Object.keys(data.data);
         var entriesValues = Object.values(data.data);
+        
 
-
-        for (let i = 0; i < entriesKeys.length; i++) {
-            plataFiat.push(new fiatCurrency(entriesKeys[i], entriesValues[i],));
+        for (let i = 0; i < entriesValues.length; i++) {
+            plataFiat.push(new fiatCurrency(entriesValues[i].code, entriesValues[i].value,));
         }
 
 
