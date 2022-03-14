@@ -216,17 +216,19 @@ addPortfolio.addEventListener('click', () => {
 })
 
 // A G R E G A R   A   P O R T F O L I O   P E R M A N E N T E
-var today = new Date();
+
+
+let guardarHistorico = document.getElementById('guardarHistorico');
+
+guardarHistorico.addEventListener('click', () => {
+
+    var today = new Date();
 var date = `${today.getDate()}/${(today.getMonth() + 1)}/${today.getFullYear()} - ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
 
 const HistorialCompras = () => {
     localStorage.setItem(`${date}`, JSON.stringify(ShoppingCart));
-}
-
-let guardarHistorico = document.getElementById('guardarHistorico');
-
-guardarHistorico.addEventListener('click', () => {
+};
     HistorialCompras();
 
     ShoppingCart.length > 0 ?
